@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChapterRequest;
 use App\Http\Requests\UpdateChapterRequest;
+use App\Http\Resources\ChapterResource;
 use App\Models\Chapter;
 
 class ChapterController extends Controller
@@ -16,7 +17,7 @@ class ChapterController extends Controller
      */
     public function index()
     {
-        return Chapter::all();
+        return ChapterResource::collection(Chapter::select('id', 'name', 'created_at')->get());
     }
 
     /**
