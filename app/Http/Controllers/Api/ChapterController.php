@@ -28,7 +28,9 @@ class ChapterController extends Controller
      */
     public function store(StoreChapterRequest $request)
     {
-        //
+        $chapter = Chapter::create($request->validated());
+
+        return new ChapterResource($chapter);
     }
 
     /**
