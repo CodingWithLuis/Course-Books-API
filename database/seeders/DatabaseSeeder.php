@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            ChapterSeeder::class
+            ChapterSeeder::class,
+            BookSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 
