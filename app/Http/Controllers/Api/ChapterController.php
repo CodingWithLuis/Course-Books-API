@@ -17,7 +17,7 @@ class ChapterController extends Controller
      */
     public function index()
     {
-        return ChapterResource::collection(Chapter::select('id', 'name', 'created_at')->get());
+        return ChapterResource::collection(Chapter::select('id', 'name', 'created_at')->paginate(2));
     }
 
     /**
@@ -53,7 +53,9 @@ class ChapterController extends Controller
      */
     public function update(UpdateChapterRequest $request, Chapter $chapter)
     {
-        //
+        $chapter->update($request->validated());
+
+        return new ChapterResource($chapter);
     }
 
     /**
@@ -64,6 +66,8 @@ class ChapterController extends Controller
      */
     public function destroy(Chapter $chapter)
     {
-        //
+        $chapter->delete();
+
+        return response()->noContent();
     }
 }
