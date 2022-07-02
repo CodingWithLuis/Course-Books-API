@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ChapterController;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('chapters', ChapterController::class);
+Route::apiResource('authors', AuthorController::class);
 
 Route::get('books/dropdown', [BookController::class, 'dropdownAllBooks']);
 Route::apiResource('books', BookController::class);

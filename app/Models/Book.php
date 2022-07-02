@@ -14,4 +14,14 @@ class Book extends Model
     protected $dates = [
         'date_published'
     ];
+
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class);
+    }
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
 }

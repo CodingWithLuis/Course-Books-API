@@ -18,7 +18,9 @@ class BookResource extends JsonResource
             'id' => $this->id,
             'name' =>  $this->name,
             'price' => '$' . number_format($this->price, 2) . ' USD',
-            'date_published' => $this->date_published->format('d/m/Y')
+            'date_published' => $this->date_published->format('d/m/Y'),
+            'authors' => AuthorResource::collection($this->authors),
+            'chapters' => ChapterResource::collection($this->chapters)
         ];
     }
 }
