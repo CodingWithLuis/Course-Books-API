@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('chapters', ChapterController::class);
+
+Route::get('books/dropdown', [BookController::class, 'dropdownAllBooks']);
 Route::apiResource('books', BookController::class);

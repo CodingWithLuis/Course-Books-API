@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ChapterResource extends JsonResource
+class DropdownBookResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,7 @@ class ChapterResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'book_id' => $this->book_id,
-            'book' => new BookResource($this->book),
-            'created_at' => $this->created_at
+            'name' => $this->name
         ];
     }
 }

@@ -17,7 +17,7 @@ class ChapterController extends Controller
      */
     public function index()
     {
-        return ChapterResource::collection(Chapter::select('id', 'name', 'created_at')->paginate(2));
+        return ChapterResource::collection(Chapter::with(['book'])->paginate(2));
     }
 
     /**
