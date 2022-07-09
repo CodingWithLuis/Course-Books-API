@@ -21,8 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('chapters', ChapterController::class);
-Route::apiResource('authors', AuthorController::class);
+Route::middleware(['auth:sanctum'])->group(function () {
 
-Route::get('books/dropdown', [BookController::class, 'dropdownAllBooks']);
-Route::apiResource('books', BookController::class);
+    Route::apiResource('chapters', ChapterController::class);
+    Route::apiResource('authors', AuthorController::class);
+
+    Route::get('books/dropdown', [BookController::class, 'dropdownAllBooks']);
+    Route::apiResource('books', BookController::class);
+});
