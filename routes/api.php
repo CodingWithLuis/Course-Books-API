@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ChapterController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/register', [AuthController::class, 'register']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('chapters', ChapterController::class);
@@ -28,4 +32,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('books/dropdown', [BookController::class, 'dropdownAllBooks']);
     Route::apiResource('books', BookController::class);
+
+    Route::post('auth/logout', [AuthController::class, 'logout']);
 });
