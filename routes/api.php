@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthorController;
-use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\v1\BookController;
 use App\Http\Controllers\Api\ChapterController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
