@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
 use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BookController extends Controller
 {
@@ -15,7 +18,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        return 'Este es la version 1 de la api libros';
+        return Cache::remember('books', 60 * 60 * 24, function () {
+            return BookResource::collection(Book::with(['authors', 'chapters'])->get());
+        });
     }
 
     /**
