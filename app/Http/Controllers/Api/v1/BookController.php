@@ -4,17 +4,21 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
-use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @group Book management
+ *
+ * APIs for managing books
+ */
 class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET books
      *
-     * @return \Illuminate\Http\Response
+     * List all books.
      */
     public function index()
     {
@@ -24,10 +28,13 @@ class BookController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * POST books
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Create new book.
+     *
+     * @bodyParam name string required The name of the book. Example: Libro 1
+     * @bodyParam price int required The price of the book. Example: 50
+     * @bodyParam published_date string required The published date of the book. Example: 2022-06-07
      */
     public function store(Request $request)
     {
@@ -35,35 +42,31 @@ class BookController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * GET book
      *
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * Display info of the book.
      */
-    public function show(Author $author)
+    public function show(Book $book)
     {
         //
     }
 
     /**
-     * Update the specified resource in storage.
+     * PUT book
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * Update info of the book.
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, Book $book)
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE book
      *
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * Delete an existing book.
      */
-    public function destroy(Author $author)
+    public function destroy(Book $book)
     {
         //
     }
