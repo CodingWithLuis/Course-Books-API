@@ -12,9 +12,39 @@ use App\Models\Book;
 class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *   path="/books",
+     *   operationId="indexBooks",
+     *   tags={"Books"},
+     *   summary="Listado de libros",
+     *   @OA\Response(
+     *     response=200,
+     *     description="Listado de libros",
+     *     @OA\JsonContent(
+     *             @OA\Property(
+     *                  type="array",
+     *                  property="data",
+     *                  @OA\Items(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="id",
+     *                          type="integer",
+     *                          example="1"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name",
+     *                          type="string",
+     *                          example="Harry Potter"
+     *                      )
+     *                  )
+     *             ),
+     *          )
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Pagina no encontrada"
+     *   )
+     * )
      */
     public function index()
     {
@@ -27,10 +57,52 @@ class BookController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBookRequest  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *      path="/books",
+     *      operationId="storeBook",
+     *      tags={"Books"},
+     *      summary="Guarda un nuevo libro",
+     *      description="Retorna los datos del libro",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/StoreBookRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Libro Creado Exitosamente",
+     *          @OA\JsonContent(
+     *             @OA\Property(
+     *                  type="array",
+     *                  property="data",
+     *                  @OA\Items(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="id",
+     *                          type="integer",
+     *                          example="2"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name",
+     *                          type="string",
+     *                          example="El señor de los anillos"
+     *                      )
+     *                  )
+     *             ),
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
      */
     public function store(StoreBookRequest $request)
     {
@@ -51,11 +123,61 @@ class BookController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBookRequest  $request
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *      path="/books/{id}",
+     *      operationId="updateBook",
+     *      tags={"Books"},
+     *      summary="Actualizar un libro",
+     *      description="Retorna la data del libro editado",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Book id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Libro editado exitosamente",
+     *          @OA\JsonContent(
+     *             @OA\Property(
+     *                  type="array",
+     *                  property="data",
+     *                  @OA\Items(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="id",
+     *                          type="integer",
+     *                          example="1"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name",
+     *                          type="string",
+     *                          example="Harry Potter"
+     *                      )
+     *                  )
+     *             ),
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
@@ -65,10 +187,38 @@ class BookController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/books/{id}",
+     *      operationId="deleteBook",
+     *      tags={"Books"},
+     *      summary="Eliminar un libro",
+     *      description="Elimina el libro y retorna No Content",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Book id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Operación Exitosa",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function destroy(Book $book)
     {
